@@ -1,0 +1,96 @@
+.mysql {
+    background: transparent;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    
+
+    .problem-layout {
+        background: transparent;
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .question-layout {
+            background: transparent;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .question {
+                background: transparent;
+                height: auto;
+                width: 90%;
+            }
+
+            .image {
+                background: transparent;
+                width: 100%;
+                max-height: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                overflow-y: scroll;
+                
+                .er-image {
+                    width: 700px;
+                    height: 550px;
+                }
+            }
+
+            .button-layout {
+                background: transparent;
+                flex: 0.3;
+                width: 90%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                margin-top: -50px;
+
+                .button {
+                    margin: 0 10px;
+                    width: 70px;
+                }
+            }
+            
+        }
+
+        .input-answer {
+            background: transparent;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .input-area {
+                background: transparent;
+                width: 97%;
+                flex: 5;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .button-layout {
+                background: transparent;
+                width: 100%;
+                flex: 0.4;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+
+                .button {
+                    margin: 0 10px;
+                    width: 70px;
+                }
+            }
+        }
+    }
+}
