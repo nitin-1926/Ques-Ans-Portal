@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import './register.scss';
+import axios from 'axios';
 const layout = {
     labelCol: {
         span: 5,
@@ -12,8 +13,9 @@ const layout = {
 };
 
 const Register = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
+    const onFinish = async (values) => {
+        const result = await axios.post('http://localhost:9000/api/register', values);
+        console.log(result);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -22,7 +24,7 @@ const Register = () => {
 
     return (
         <Layout className='form-layout'>
-             <Layout className="header-section">
+            <Layout className="header-section">
                 <h3 className="header-text">Register</h3>
             </Layout>
             <Form

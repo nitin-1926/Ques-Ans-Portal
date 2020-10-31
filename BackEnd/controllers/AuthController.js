@@ -3,33 +3,32 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const register = (req,res,next) => {
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-        if(err) {
+    bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
+        if (err) {
             res.json({
-                error : err
+                error: err
             })
         }
 
-        let user = new User ({
-            name : req.body.name,
+        let user = new User({
+            name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
             password: hashedPass
         })
         user.save()
-        .then(users => {
-            res.json({
-                message: "User Added Successfully",
-                data: users
+            .then(users => {
+                res.json({
+                    message: "User Added Successfully",
+                    data: users
+                })
             })
-        })
-        .catch(error => {
-            res.json({
-                message : "An error occurred!"
-            })
-        })
-
-    })
+            .catch(error => {
+                res.json({
+                    message: "An error occurred!"
+                })
+            });
+    });
 }
 
 const login = (req,res,next) => {

@@ -6,7 +6,7 @@ const cors = require('cors')
 
 const AuthRoute = require('./routes/auth')
 
-const uri = 'mongodb+srv://Pankhuri:anatomy46@cluster0.cl6c0.gcp.mongodb.net/mongologinexample?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://Nitin:downloadapp007@cluster0.9epry.mongodb.net/Ques-Ans-Portal?retryWrites=true&w=majority'
 mongoose.connect(uri,
     {
         useNewUrlParser: true,
