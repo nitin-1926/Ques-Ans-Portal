@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { UserOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons';
+import { Tag } from 'antd';
 import './navbar.scss';
 
 
 const Navbar = () => {
     const location = useLocation();
     const email = sessionStorage.getItem('email');
-    const admin = sessionStorage.getItem('isAdmin');
+    const isAdmin = sessionStorage.getItem('isAdmin');
     const [user, setUser] = useState(sessionStorage.getItem('isLoggedIn'));
 
     const onPressLogout = () => {
@@ -21,21 +22,22 @@ const Navbar = () => {
         return (
             <div className="navbar">
                 <div className="logo">
-                    <Link to={admin ? '/admin_home' : '/home'}>
+                    <Link to={isAdmin ? '/admin_home' : '/home'}>
                         <h1 className="logo-text">
                             <HomeOutlined style={{marginRight: '8px'}}/>
-                            Training Portal
+                            Ques Ans Portal
                         </h1>
                     </Link>
                 </div>
                 <div className="button-layout">
-                    <Link to={admin ? '/admin_home' : '/home'}>
+                    <Link>
                         <h5 className="button-text">
                             <UserOutlined style={{marginRight: '8px'}}/>
                             {email}
+                            {isAdmin ? <Tag style={{marginLeft: '10px'}} color="red">Admin</Tag> : <Tag style={{marginLeft: '10px'}} color="green">Candidate</Tag>}
                         </h5>
                     </Link>
-                    <Link to={admin ? '/admin_login' : '/candidate_login'}>
+                    <Link to={isAdmin ? '/admin_login' : '/candidate_login'}>
                         <h5 className="button-text" style={{ marginRight: "80px" }} onClick={onPressLogout}>
                             <LogoutOutlined style={{marginRight: '8px'}}/>
                             Logout
@@ -50,7 +52,7 @@ const Navbar = () => {
         return (
             <div className="navbar">
                 <div className="logo">
-                    <Link to='/candidate_login'><h1 className="logo-text">Training Portal</h1></Link>
+                    <Link to='/candidate_login'><h1 className="logo-text">Ques Ans Portal</h1></Link>
                 </div>
                 <div className="button-layout">
                     <Link to={location.pathname === '/admin_login' ? '/candidate_login' :'/admin_login'}>

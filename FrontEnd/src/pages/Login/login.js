@@ -40,6 +40,7 @@ const Login = () => {
         catch(e) {
             addNotification('error', 'Error Occurred', `Some error occurred. ${e}`, 'error');
         }
+        setLoading(false);
     }
 
     const adminLogin = async (data) => {
@@ -57,6 +58,7 @@ const Login = () => {
         catch(e) {
             addNotification('error', 'Error Occurred', `Some error occurred. ${e}`, 'error');
         }
+        setLoading(false);
     }
 
     const onFinish = (values) => { 
