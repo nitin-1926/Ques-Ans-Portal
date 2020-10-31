@@ -3,6 +3,7 @@ import { Form, Input, Button, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import './register.scss';
 import axios from 'axios';
+import { addNotification } from '../../common/common';
 const layout = {
     labelCol: {
         span: 5,
@@ -13,13 +14,16 @@ const layout = {
 };
 
 const Register = () => {
+    const onSuccessRegister = () => {
+        window.location.href = '/';
+    }
     const onFinish = async (values) => {
-        const result = await axios.post('http://localhost:9000/api/register', values);
-        console.log(result);
+        await axios.post('http://localhost:9000/api/register', values);
+        addNotification('registerSuccess', 'Register Successful', 'You have been registered successfully', 'success', onSuccessRegister);
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        addNotification('registerError', 'Register Failed', `Register Attempt Failed. ${errorInfo}`, 'error');
     };
 
     return (
@@ -83,8 +87,6 @@ const Register = () => {
                     </Form.Item>
                 </Form>
             </Layout>
-
-            
     );
 };
 
