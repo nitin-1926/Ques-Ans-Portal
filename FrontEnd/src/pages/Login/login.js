@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Layout, notification } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, Layout } from 'antd';
 import { useLocation } from 'react-router-dom';
-import useCandidateLogin from '../../hooks/useCandidateLogin';
-import useAdminLogin from '../../hooks/useAdminLogin';
+import axios from 'axios';
 import 'antd/dist/antd.css';
 import './login.scss';
+import { addNotification } from '../../common/common';
 const layout = {
     labelCol: {
         span: 5,
@@ -15,38 +15,51 @@ const layout = {
 };
 
 const Login = () => {
-    const [candidateLogin, message] = useCandidateLogin();
-    const [adminLogin, errMessage] = useAdminLogin();
     const location = useLocation();
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
+    const onSuccessfulLogin = () => {
         setLoading(false);
-        if (message !== 'successful' && message !== '') {
-            notification['error']({
-                key: 'error',
-                message: 'Login Failed',
-                description: `Login Attempt Failed. ${message}`,
-                duration: 3,
-                placement: 'topRight',
-                style: {
-                    width: 380,
-                    height: 100,
-                    backgroundColor: '#FFF2F0',
-                    border: 'solid 1px #FFCCC7',
-                    color: 'black'
-                },
-            });
-            if(location.pathname === '/admin_login') {
-                console.log(errMessage);
+        if(location.pathname === '/admin_login') {
+            window.location.href = '/admin_home';
+        } else {
+            window.location.href = '/home';
+        }
+    }
+    const candidateLogin = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:9000/api/login', data);
+            if (response.data.message === 'successful') {
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('isLoggedIn', true);
+                addNotification('candidateLoginSuccess', 'Login Successful', 'You have been logged in successfully', 'success', onSuccessfulLogin);
             } else {
-                console.log(message);
+                addNotification('candidateLoginFailed', 'Login Failed', `Sorry! Login Failed. ${response.data.message}`, 'error');
             }
         }
-    }, [message, errMessage, location.pathname]);
+        catch(e) {
+            addNotification('error', 'Error Occurred', `Some error occurred. ${e}`, 'error');
+        }
+    }
 
-    const onFinish = (values) => {
-        console.log('Success:', values.email); 
+    const adminLogin = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:9000/api/admin_login', data);
+            if(response.data.message === 'successful') {
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('isLoggedIn', true);
+                sessionStorage.setItem('isAdmin', true);
+                addNotification('adminLoginSuccess', 'Login Successful', 'You have been logged in successfully', 'success', onSuccessfulLogin);
+            } else {
+                addNotification('adminLoginFailed', 'Login Failed', `Sorry! Login Failed. ${response.data.message}`, 'error');
+            }
+        }
+        catch(e) {
+            addNotification('error', 'Error Occurred', `Some error occurred. ${e}`, 'error');
+        }
+    }
+
+    const onFinish = (values) => { 
         setLoading(true)
         if(location.pathname === '/admin_login') {
             adminLogin(values);
@@ -56,21 +69,7 @@ const Login = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        notification['warning']({
-            key: 'warning',
-            message: 'Some error occurred',
-            description: 'We are sorry, but you cant go ahead due to some error!',
-            duration: 3,
-            placement: 'topRight',
-            style: {
-                width: 380,
-                height: 100,
-                backgroundColor: '#FFFBE6',
-                border: 'solid 1px #FFE58F',
-                color: 'black'
-            },
-        });
-        console.log('Failed:', errorInfo);
+        addNotification('error', 'Error Occurred', `Some error occurred. ${errorInfo}`, 'error');
     };
 
     return (

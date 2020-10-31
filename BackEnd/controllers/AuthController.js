@@ -87,7 +87,7 @@ const admin_login = (req,res,next) => {
                         });
                     } else {
                         res.json({
-                            message : "You are not admin!"
+                            message : "You are not an admin!"
                         });
                     }
                 } else {
