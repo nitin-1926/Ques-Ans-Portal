@@ -68,6 +68,19 @@ const Register = () => {
                         <Input className='input'/>
                     </Form.Item>
                     <Form.Item
+                        label="Phone number"
+                        name="phone"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your phone number',
+                        },
+                        ]}
+                        className='input-area'
+                    >
+                        <Input className='input'/>
+                    </Form.Item>
+                    <Form.Item
                         label="Password"
                         name="password"
                         rules={[
