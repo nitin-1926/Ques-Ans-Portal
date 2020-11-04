@@ -7,19 +7,17 @@ import {
     Button,
     Divider,
     Input,
-    Image,
-    notification
+    Image
 } from 'antd';
 import 'antd/dist/antd.css';
 import './questionLayout.scss';
-
-import useAnswerSubmit from '../../hooks/useAnswerSubmit';
+import axios from 'axios';
+import { addNotification } from '../../common/common';
 
 const QuestionLayout = ({ questions, test }) => {
     const [answer, setAnswer] = useState('');
     const [number, setNumber] = useState(0);
     const [answersArray, setAnswersArray] = useState([]);
-    const [answerSubmit] = useAnswerSubmit();
     const email = sessionStorage.getItem('email');
     const length = questions.length;
     const { Title, Paragraph } = Typography;
@@ -28,6 +26,23 @@ const QuestionLayout = ({ questions, test }) => {
     const userData = sessionStorage.getItem('user');
     const user = JSON.parse(userData);
     console.log(user);
+
+    const onSuccessfulSubmit = () => {
+        window.location.href = '/home';
+    }
+    const answerSubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:9000/api/submitAnswer', data);
+            if (response.data.message === 'successful') {
+                addNotification('testFinished', 'Test Finished', 'Your test has been finished and the answers are successfully submitted', 'success', onSuccessfulSubmit);
+            } else {
+                addNotification('testFinishedError', 'Test Submission Failed', 'Your Test was not submitted successfully. Please try again later', 'error');
+            }
+        }
+        catch (e) {
+            addNotification('someError', 'Some Error Occurred', `Sorry, an error occurred. ${e}`, 'error');
+        }
+    }
     const onPressFinish = () => {
         const data = {
             email,
@@ -57,20 +72,7 @@ const QuestionLayout = ({ questions, test }) => {
             tempArray.push(input);
             setAnswersArray(tempArray);
         }
-		notification['success']({
-			key: 'notification',
-			message: 'Submit Successful',
-			description: 'Your answer was submitted successfully',
-			duration: 2,
-			placement: 'topRight',
-			style: {
-				width: 380,
-				height: 100,
-				backgroundColor: '#F6FFED',
-				border: 'solid 1px #B7EB8F',
-				color: 'black'
-			}
-		});
+        addNotification('answerSubmit', 'Submit Successful', 'Your answer was submitted successfully', 'success');
     }
 
     return (

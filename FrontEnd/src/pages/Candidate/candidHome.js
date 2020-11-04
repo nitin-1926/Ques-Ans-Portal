@@ -39,35 +39,6 @@ const CandidateHome = () => {
                     </Card>
                 </Col>
             </Row>
-            {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
-                <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: 250, height: 150 }}
-                        cover={<img alt="AWS" src={awsImage} />}
-                    >
-                        <Meta title="AWS Test" description='Created by: ' />
-                    </Card>
-                </Col>
-                <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: 250, height: 150 }}
-                        cover={<img alt="AWS" src={awsImage} />}
-                    >
-                        <Meta title="AWS Test" description='Created by: ' />
-                    </Card>
-                </Col>
-                <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: 250, height: 150 }}
-                        cover={<img alt="AWS" src={awsImage} />}
-                    >
-                        <Meta title="AWS Test" description='Created by: ' />
-                    </Card>
-                </Col>
-            </Row> */}
         </Layout>
     );
 };
