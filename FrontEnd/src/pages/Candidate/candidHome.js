@@ -9,7 +9,7 @@ import sqlImage from '../../assets/images/mysql.jpg';
 const CandidateHome = () => { 
     const { Meta } = Card;
     return (
-        <Layout>
+        <Layout style={{overflow: 'hidden'}}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center" style={{padding: '48px'}}>
                 <Col span={6}>
                     <Card
@@ -17,7 +17,7 @@ const CandidateHome = () => {
                         cover={<img style={{height: '200px'}} alt="AWS" src={awsImage} />}
                         onClick={() => window.location.href = '/questions/aws'}
                     >
-                        <Meta title="AWS Test" description='Created by: ' />
+                        <Meta title="AWS Test" description='Created by: Nitin Sir' />
                     </Card>
                 </Col>
                 <Col span={6}>
@@ -26,7 +26,7 @@ const CandidateHome = () => {
                         cover={<img style={{height: '200px'}} alt="AWS" src={pythonImage} />}
                         onClick={() => window.location.href = '/questions/python'}
                     >
-                        <Meta title="Python Test" description='Created by: ' />
+                        <Meta title="Python Test" description='Created by: Nitin Sir' />
                     </Card> 
                 </Col>
                 <Col span={6}>
@@ -35,7 +35,7 @@ const CandidateHome = () => {
                         cover={<img style={{height: '200px'}} alt="AWS" src={sqlImage} />}
                         onClick={() => window.location.href = '/questions/mysql'}
                     >
-                        <Meta title="MySQL Test" description='Created by: ' />
+                        <Meta title="MySQL Test" description='Created by: Nitin Sir' />
                     </Card>
                 </Col>
             </Row>
