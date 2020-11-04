@@ -1,22 +1,73 @@
 import React from 'react';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Card, Grid } from 'antd';
 import 'antd/dist/antd.css';
 import './candidHome.scss';
+import awsImage from '../../assets/images/aws.jpg';
+import pythonImage from '../../assets/images/python.jpg';
+import sqlImage from '../../assets/images/mysql.jpg';
 
-const CandidateHome = () => {    
+const CandidateHome = () => { 
+    const { Meta } = Card;
     return (
-        <Layout className='candid-home'>
-            <Row className='options-layout'>
-                <Col className='options aws' span={8}>
-                    <Button className='button' onClick={() => window.location.href = '/questions/aws'}>AWS</Button>
+        <Layout>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center" style={{padding: '48px'}}>
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        cover={<img style={{height: '200px'}} alt="AWS" src={awsImage} />}
+                        onClick={() => window.location.href = '/questions/aws'}
+                    >
+                        <Meta title="AWS Test" description='Created by: ' />
+                    </Card>
                 </Col>
-                <Col className='options python' span={8}>
-                    <Button className='button' onClick={() => window.location.href = '/questions/python'}>Python</Button> 
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        cover={<img style={{height: '200px'}} alt="AWS" src={pythonImage} />}
+                        onClick={() => window.location.href = '/questions/python'}
+                    >
+                        <Meta title="Python Test" description='Created by: ' />
+                    </Card> 
                 </Col>
-                <Col className='options sql' span={8}>
-                    <Button className='button' onClick={() => window.location.href = '/questions/mysql'}>MySQL</Button>
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        cover={<img style={{height: '200px'}} alt="AWS" src={sqlImage} />}
+                        onClick={() => window.location.href = '/questions/mysql'}
+                    >
+                        <Meta title="MySQL Test" description='Created by: ' />
+                    </Card>
                 </Col>
             </Row>
+            {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        style={{ width: 250, height: 150 }}
+                        cover={<img alt="AWS" src={awsImage} />}
+                    >
+                        <Meta title="AWS Test" description='Created by: ' />
+                    </Card>
+                </Col>
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        style={{ width: 250, height: 150 }}
+                        cover={<img alt="AWS" src={awsImage} />}
+                    >
+                        <Meta title="AWS Test" description='Created by: ' />
+                    </Card>
+                </Col>
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        style={{ width: 250, height: 150 }}
+                        cover={<img alt="AWS" src={awsImage} />}
+                    >
+                        <Meta title="AWS Test" description='Created by: ' />
+                    </Card>
+                </Col>
+            </Row> */}
         </Layout>
     );
 };
